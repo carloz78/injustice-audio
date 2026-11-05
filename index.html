@@ -81,6 +81,7 @@ nav.principal a:hover{color:var(--hueso)}
 .info li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--acento)}
 .info .pie{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .info .peso{color:var(--apagado);font-size:.92rem}
+.nota-manual{flex-basis:100%;color:var(--apagado);font-size:.95rem;margin:0}
 
 /* secciones */
 section.bloque{padding:72px 0}
@@ -195,8 +196,9 @@ footer.sitio a{color:var(--hueso)}
           <li>Forma de onda en vivo para ver el golpe</li>
         </ul>
         <div class="pie">
-          <a class="boton" href="https://github.com/carloz78/injustice-audio/releases/latest/download/GabberDrive-Setup.exe" download>Descargar GabberDrive</a>
-          <span class="peso">Windows 64 bits · VST3</span>
+          <a class="boton" href="https://github.com/carloz78/injustice-audio/releases/latest/download/GabberDrive.vst3.zip" download>Descargar GabberDrive</a>
+          <span class="peso">Windows 64 bits · VST3 · sin instalador</span>
+          <p class="nota-manual">Descomprime el .zip y copia la carpeta <code>GabberDrive.vst3</code> a <code>C:\Program Files\Common Files\VST3</code>. Después busca plugins nuevos en FL Studio.</p>
         </div>
       </div>
     </article>
