@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Injustice Audio · Plugins gratis para gabber y hardcore</title>
+<meta name="description" content="Tres plugins VST3 gratis para Windows y FL Studio: un generador de kicks, un sintetizador lead y un generador de bajos. Hechos para gabber, hardcore, hardstyle y rave.">
+<meta property="og:title" content="Injustice Audio · Plugins gratis para gabber y hardcore">
+<meta property="og:description" content="Kicks, leads y bajos VST3. Descarga gratis.">
+<meta property="og:image" content="img/lowcore.jpg">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Big+Shoulders+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asfalto:#141516;
+  --chasis:#1d1f21;
+  --chasis-2:#26292c;
+  --borde:#34383c;
+  --hueso:#ebe8e1;
+  --apagado:#a4a8ab;
+  --peligro:#f2c200;
+  --rojo:#ff6b6b;
+  --azul:#4f9cff;
+  --morado:#9b6dff;
+  --lima:#a8f000;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --texto:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--asfalto);color:var(--hueso);font:400 1.0625rem/1.6 var(--texto);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--peligro);outline-offset:3px}
+.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
+
+/* cinta de precaucion */
+.cinta{height:14px;background:repeating-linear-gradient(-45deg,var(--peligro) 0 16px,#111 16px 32px)}
+
+/* cabecera */
+header.sitio{border-bottom:1px solid var(--borde)}
+header.sitio .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.marca{font:800 1.35rem/1 var(--display);letter-spacing:.06em;text-decoration:none;text-transform:uppercase}
+.marca span{color:var(--peligro)}
+nav.principal{display:flex;gap:22px;font-weight:500;font-size:.98rem}
+nav.principal a{text-decoration:none;color:var(--apagado)}
+nav.principal a:hover{color:var(--hueso)}
+
+/* portada */
+.portada{padding:72px 0 56px}
+.portada h1{font:900 clamp(3.6rem,13vw,9.5rem)/.84 var(--display);text-transform:uppercase;letter-spacing:-.01em}
+.portada h1 em{font-style:normal;color:var(--peligro)}
+.portada p.sub{max-width:34rem;margin-top:28px;font-size:1.25rem;color:var(--hueso)}
+.portada p.sub strong{font-weight:600}
+.portada .acciones{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.portada .nota{color:var(--apagado);font-size:.95rem}
+
+.boton{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:6px;font:700 1.15rem/1 var(--display);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;background:var(--acento,var(--peligro));color:#111;border:2px solid var(--acento,var(--peligro));transition:transform .12s,background .12s}
+.boton:hover{transform:translateY(-2px)}
+.boton.fantasma{background:transparent;color:var(--hueso);border-color:var(--borde)}
+.boton.fantasma:hover{border-color:var(--hueso)}
+
+/* rack */
+.rack{padding:8px 0 24px}
+.rack > .wrap{display:flex;flex-direction:column;gap:28px}
+.unidad{position:relative;display:grid;grid-template-columns:1.25fr 1fr;gap:0;background:var(--chasis);border:1px solid var(--borde);border-radius:6px;overflow:hidden;border-left:44px solid var(--chasis-2);border-right:44px solid var(--chasis-2)}
+.unidad:nth-child(even){grid-template-columns:1fr 1.25fr}
+.unidad:nth-child(even) .captura{order:2}
+.unidad::before,.unidad::after{content:"";position:absolute;left:-30px;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6a6e72,#1a1b1c 70%);box-shadow:0 calc(100% - 32px) 0 0 transparent}
+.unidad::before{top:16px}
+.unidad::after{bottom:16px}
+.captura{background:#08090a;padding:20px;display:flex;align-items:center;justify-content:center}
+.captura img{width:100%;height:auto;border-radius:4px;box-shadow:0 0 0 1px var(--acento),0 14px 40px -12px var(--acento)}
+.info{padding:32px 36px 34px;display:flex;flex-direction:column;gap:14px;border-top:5px solid var(--acento)}
+.info h2{font:900 clamp(2.4rem,5vw,3.6rem)/.9 var(--display);text-transform:uppercase}
+.info .tipo{color:var(--acento);font-weight:600}
+.info ul{margin:4px 0 6px;padding:0;list-style:none;display:grid;gap:7px}
+.info li{padding-left:20px;position:relative;color:var(--hueso)}
+.info li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:3px;background:var(--acento)}
+.info .pie{margin-top:auto;padding-top:10px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.info .peso{color:var(--apagado);font-size:.92rem}
+
+/* secciones */
+section.bloque{padding:72px 0}
+section.bloque h2.titulo{font:900 clamp(2.2rem,6vw,3.8rem)/.92 var(--display);text-transform:uppercase;max-width:20ch}
+section.bloque p.intro{max-width:40rem;margin-top:16px;color:var(--apagado);font-size:1.12rem}
+
+/* aviso de Windows */
+.aviso{background:var(--chasis);border-block:1px solid var(--borde)}
+.aviso .tira{display:inline-block;background:var(--peligro);color:#111;font:800 1rem/1 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;border-radius:4px;margin-bottom:20px}
+.pantallas{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:36px}
+.paso-win h3{font:800 1.4rem/1.1 var(--display);text-transform:uppercase;margin-bottom:12px}
+.paso-win p{color:var(--apagado);margin-top:14px}
+.win{background:#1b4a8f;color:#fff;font-family:"Segoe UI",system-ui,sans-serif;padding:26px 26px 22px;border-radius:4px;min-height:230px;display:flex;flex-direction:column;gap:10px;box-shadow:0 18px 40px -18px #000}
+.win b.t{font-size:1.35rem;font-weight:600;line-height:1.2}
+.win .c{font-size:.92rem;line-height:1.5;opacity:.95}
+.win .enlace{text-decoration:underline;font-size:.95rem;width:max-content}
+.win .resalte{outline:3px solid var(--peligro);outline-offset:4px;border-radius:2px}
+.win .fila{margin-top:auto;display:flex;gap:10px;justify-content:flex-end}
+.win .b{padding:8px 16px;border:1px solid #cfe0f7;font-size:.9rem;background:transparent;color:#fff}
+.win .b.fuerte{background:#fff;color:#1b4a8f;font-weight:600}
+.por-que{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.por-que h3{font:800 1.25rem/1.1 var(--display);text-transform:uppercase;margin-bottom:8px;color:var(--peligro)}
+.por-que p{color:var(--apagado);font-size:1rem}
+
+/* instalar */
+.pasos{list-style:none;padding:0;margin-top:36px;display:grid;gap:0;max-width:44rem;counter-reset:p}
+.pasos li{counter-increment:p;display:grid;grid-template-columns:56px 1fr;gap:16px;padding:18px 0;border-top:1px solid var(--borde)}
+.pasos li:last-child{border-bottom:1px solid var(--borde)}
+.pasos li::before{content:counter(p);font:900 2.4rem/1 var(--display);color:var(--peligro)}
+.pasos strong{display:block;font-weight:600}
+.pasos span{color:var(--apagado)}
+code,kbd{font:500 .92em ui-monospace,Consolas,monospace;background:var(--chasis-2);padding:2px 7px;border-radius:4px}
+
+/* preguntas */
+.preguntas{margin-top:32px;max-width:46rem;display:grid;gap:0}
+details{border-top:1px solid var(--borde);padding:0}
+details:last-child{border-bottom:1px solid var(--borde)}
+summary{cursor:pointer;list-style:none;padding:18px 36px 18px 0;font-weight:600;font-size:1.1rem;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:4px;top:50%;translate:0 -50%;font:700 1.6rem/1 var(--display);color:var(--peligro)}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 20px;color:var(--apagado);max-width:40rem}
+
+footer.sitio{border-top:1px solid var(--borde);padding:40px 0 56px;color:var(--apagado);font-size:.96rem}
+footer.sitio .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px}
+footer.sitio a{color:var(--hueso)}
+
+@media (max-width:860px){
+  .unidad,.unidad:nth-child(even){grid-template-columns:1fr;border-left-width:20px;border-right-width:20px}
+  .unidad:nth-child(even) .captura{order:0}
+  .unidad::before,.unidad::after{left:-15px;width:10px;height:10px}
+  .pantallas,.por-que{grid-template-columns:1fr}
+  .info{padding:26px 22px 28px}
+  nav.principal{gap:14px;font-size:.9rem}
+}
+@media (max-width:520px){
+  nav.principal a:nth-child(3){display:none}
+  .portada{padding:48px 0 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .boton{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="cinta" aria-hidden="true"></div>
+
+<header class="sitio">
+  <div class="wrap">
+    <a class="marca" href="#">Injustice <span>Audio</span></a>
+    <nav class="principal" aria-label="Principal">
+      <a href="#plugins">Plugins</a>
+      <a href="#aviso-windows">Aviso de Windows</a>
+      <a href="#instalar">Instalar</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="portada">
+  <div class="wrap">
+    <h1>Pesado.<br>Rápido.<br><em>Gratis.</em></h1>
+    <p class="sub">Tres plugins VST3 para Windows hechos para <strong>gabber, hardcore, hardstyle y rave</strong>: un generador de kicks, un sintetizador lead y un generador de bajos. Se descargan, se instalan y suenan en tu DAW, sin costo.</p>
+    <div class="acciones">
+      <a class="boton" href="#plugins">Ver los plugins</a>
+      <a class="boton fantasma" href="#aviso-windows">Antes de instalar, lee esto</a>
+    </div>
+  </div>
+</section>
+
+<div class="cinta" aria-hidden="true"></div>
+
+<section class="rack" id="plugins" style="padding-top:56px">
+  <div class="wrap">
+
+    <!-- GABBERDRIVE -->
+    <article class="unidad" style="--acento:var(--rojo)">
+      <div class="captura">
+        <img src="img/gabberdrive.jpg" width="1520" height="1080" alt="Interfaz de GabberDrive: pestañas gabber y gabberpop, forma de onda del kick y cinco perillas" loading="lazy">
+      </div>
+      <div class="info">
+        <p class="tipo">Generador de kicks</p>
+        <h2>GabberDrive</h2>
+        <p>Cualquier nota MIDI dispara un kick de gabber o gabberpop. Si no te gusta, pulsa Rehacer y te genera otro.</p>
+        <ul>
+          <li>Dos estilos: gabber y gabberpop</li>
+          <li>Pitch, decay, click, drive y tone</li>
+          <li>Forma de onda en vivo para ver el golpe</li>
+        </ul>
+        <div class="pie">
+          <a class="boton" href="https://github.com/carloz78/injustice-audio/releases/latest/download/GabberDrive-Setup.exe" download>Descargar GabberDrive</a>
+          <span class="peso">Windows 64 bits · VST3</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- RAVECORE -->
+    <article class="unidad" style="--acento:var(--morado)">
+      <div class="captura">
+        <img src="img/ravecore.jpg" width="2106" height="1180" alt="Interfaz de RAVECORE Synthesizer: osciladores, filtro, envolvente, efectos y teclado" loading="lazy">
+      </div>
+      <div class="info">
+        <p class="tipo">Sintetizador lead</p>
+        <h2>Ravecore</h2>
+        <p>Un sintetizador de 8 voces para leads de gabber pop, hardcore, hardstyle, hard dance, trance, rave y electro.</p>
+        <ul>
+          <li>Osc 1, Osc 2 y Sub, con unison de hasta 7 voces</li>
+          <li>Filtro LP 24, LP 12, HP 12 y BP 12</li>
+          <li>Distortion, chorus, reverb, delay, phaser y EQ</li>
+          <li>8 estilos con 4 variantes cada uno</li>
+        </ul>
+        <div class="pie">
+          <a class="boton" href="https://github.com/carloz78/injustice-audio/releases/latest/download/RAVECORE-Setup.exe" download>Descargar Ravecore</a>
+          <span class="peso">Windows 64 bits · VST3</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- LOWCORE -->
+    <article class="unidad" style="--acento:var(--lima)">
+      <div class="captura">
+        <img src="img/lowcore.jpg" width="2340" height="1318" alt="Interfaz de LOWCORE Bass Synthesizer: generador de bajos, oscilador, sub, filtro, distorsión y efectos" loading="lazy">
+      </div>
+      <div class="info">
+        <p class="tipo">Sintetizador y generador de bajos</p>
+        <h2>Lowcore</h2>
+        <p>Bajos con golpe para gabber, hardcore y hardstyle. Elige un estilo, pulsa Generate y sigue generando hasta que uno te convenza.</p>
+        <ul>
+          <li>6 estilos con 99 bajos cada uno</li>
+          <li>Sub limpio, filtro, distorsión y pitch env</li>
+          <li>Macros: Aggression, Weight, Movement y Character</li>
+          <li>Graves siempre al centro y volumen parejo</li>
+          <li>Guarda y carga tus propios presets</li>
+        </ul>
+        <div class="pie">
+          <a class="boton" href="https://github.com/carloz78/injustice-audio/releases/latest/download/LOWCORE-Setup.exe" download>Descargar Lowcore</a>
+          <span class="peso">Windows 64 bits · VST3</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="bloque aviso" id="aviso-windows">
+  <div class="wrap">
+    <span class="tira">Aviso de Windows</span>
+    <h2 class="titulo">Windows te va a avisar. Es normal.</h2>
+    <p class="intro">Al abrir el instalador, Windows puede mostrar «Windows protegió su PC». Pasa con casi cualquier programa pequeño que no viene de una empresa grande. Puedes continuar con estos dos clics.</p>
+
+    <div class="pantallas">
+      <div class="paso-win">
+        <h3>1. Pulsa «Más información»</h3>
+        <div class="win" role="img" aria-label="Ventana de Windows que dice Windows protegió su PC, con el enlace Más información resaltado">
+          <b class="t">Windows protegió su PC</b>
+          <span class="c">Microsoft Defender SmartScreen impidió el inicio de una aplicación desconocida. Ejecutar esta aplicación podría poner en riesgo su PC.</span>
+          <span class="enlace resalte">Más información</span>
+          <div class="fila"><span class="b">No ejecutar</span></div>
+        </div>
+        <p>El botón «Ejecutar de todas formas» todavía no aparece.</p>
+      </div>
+      <div class="paso-win">
+        <h3>2. Pulsa «Ejecutar de todas formas»</h3>
+        <div class="win" role="img" aria-label="La misma ventana de Windows, ahora con el botón Ejecutar de todas formas resaltado">
+          <b class="t">Windows protegió su PC</b>
+          <span class="c">Aplicación: Setup.exe<br>Editor: Editor desconocido</span>
+          <div class="fila"><span class="b fuerte resalte">Ejecutar de todas formas</span><span class="b">No ejecutar</span></div>
+        </div>
+        <p>Se abre el instalador normal. Pulsa «Siguiente» hasta terminar.</p>
+      </div>
+    </div>
+
+    <div class="por-que">
+      <div>
+        <h3>¿Por qué sale el aviso?</h3>
+        <p>Los instaladores necesitan una firma digital de pago para que Windows los reconozca. Estos plugins son gratis y no la tienen todavía.</p>
+      </div>
+      <div>
+        <h3>¿Qué hace el instalador?</h3>
+        <p>Solo copia el plugin a la carpeta de plugins VST3 de tu PC. No instala nada más.</p>
+      </div>
+      <div>
+        <h3>¿Y si Chrome bloquea la descarga?</h3>
+        <p>Chrome puede decir «Este archivo es peligroso» por la misma razón. Elige «Conservar», o descarga con Microsoft Edge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloque" id="instalar">
+  <div class="wrap">
+    <h2 class="titulo">Instala en cinco pasos</h2>
+    <p class="intro">Funciona igual para los tres plugins. Los ejemplos son de FL Studio, pero cualquier programa que abra VST3 los puede cargar.</p>
+    <ol class="pasos">
+      <li><div><strong>Descarga el instalador</strong><span>Pulsa el botón del plugin que quieras. Se baja un archivo que termina en <code>-Setup.exe</code>.</span></div></li>
+      <li><div><strong>Cierra FL Studio</strong><span>Así detecta el plugin nuevo al abrirse.</span></div></li>
+      <li><div><strong>Abre el instalador</strong><span>Si Windows muestra el aviso, sigue los dos clics de arriba. Después pulsa «Siguiente» hasta terminar.</span></div></li>
+      <li><div><strong>Busca plugins nuevos</strong><span>Abre FL Studio y ve a <code>Options</code>, <code>Manage plugins</code> y pulsa <code>Find installed plugins</code>.</span></div></li>
+      <li><div><strong>Cárgalo en tu proyecto</strong><span>Lo encuentras en <code>Plugin database</code>, <code>Installed</code>, <code>Generators</code>.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="bloque" id="preguntas" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="titulo">Preguntas</h2>
+    <div class="preguntas">
+      <details>
+        <summary>¿De verdad son gratis?</summary>
+        <p>Sí. Los tres plugins se descargan sin pagar y sin registrarte.</p>
+      </details>
+      <details>
+        <summary>¿En qué programas funcionan?</summary>
+        <p>Están hechos y probados en FL Studio en Windows. Son plugins VST3 de 64 bits, así que otros programas que carguen VST3 también deberían abrirlos.</p>
+      </details>
+      <details>
+        <summary>¿Funcionan en Mac o en Linux?</summary>
+        <p>Por ahora no. Solo hay versión para Windows.</p>
+      </details>
+      <details>
+        <summary>El plugin no aparece en FL Studio</summary>
+        <p>Abre <code>Options</code>, <code>Manage plugins</code> y pulsa <code>Find installed plugins</code> otra vez. Si ya tenías una versión anterior instalada, cierra FL Studio por completo antes de instalar la nueva.</p>
+      </details>
+      <details>
+        <summary>¿Cómo lo desinstalo?</summary>
+        <p>En Windows abre <code>Configuración</code>, <code>Aplicaciones</code>, busca el nombre del plugin y pulsa «Desinstalar».</p>
+      </details>
+      <details>
+        <summary>Encontré un error o tengo una idea</summary>
+        <p>Escríbeme en TikTok, en <a href="https://www.tiktok.com/@injustice7193" rel="noopener">@injustice7193</a>. Cuéntame qué pasó y en qué programa lo usabas.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="cinta" aria-hidden="true"></div>
+<footer class="sitio">
+  <div class="wrap">
+    <div>
+      <strong style="color:var(--hueso)">Injustice Audio</strong><br>
+      Plugins gratis para gabber y hardcore.
+    </div>
+    <div>
+      <a href="https://www.tiktok.com/@injustice7193" rel="noopener">TikTok @injustice7193</a><br>
+      Hecho con JUCE.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
