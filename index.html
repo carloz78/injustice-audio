@@ -410,6 +410,23 @@ body.menu-abierto .menu span::after{transform:translateY(-6px) rotate(-45deg)}
 .estado-desc li.listo span{color:#7fe08a}
 .compartir{background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 16px;color:var(--mut);cursor:pointer;font-size:.92rem}
 .compartir:hover{color:var(--text);border-color:var(--text)}
+
+/* ===== v8: transiciones y busqueda ===== */
+header.sitio{view-transition-name:cabecera}
+::view-transition-group(cabecera){animation-duration:0s}
+::view-transition-old(root){animation:sale .14s ease both}
+::view-transition-new(root){animation:entra .4s cubic-bezier(.2,.7,.2,1) .12s both}
+@keyframes sale{to{opacity:0;transform:translateY(-6px)}}
+@keyframes entra{from{opacity:0;transform:translateY(18px)}}
+.cat-main .ent .tarjeta,.cat-main .ent .bundle{animation:aparece .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*60ms)}
+@keyframes aparece{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:none}}
+#lat-nav a{transition:background-color .2s,color .2s,border-color .2s}
+.cat-cab h1,.cat-cab p{animation:aparece .45s cubic-bezier(.2,.7,.2,1) both}
+.cat-cab p{animation-delay:.06s}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+  .cat-main .ent .tarjeta,.cat-main .ent .bundle,.cat-cab h1,.cat-cab p{animation:none}
+}
 </style>
 </head>
 <body>
@@ -640,10 +657,11 @@ var B=[
  {id:"completo",nombre:"Colección completa",tipo:"6 plugins",items:["gabberdrive","ravecore","lowcore","comp-core","eq-guide","distortion-core"],
   lema:"Todo Injustice Audio de una vez: tres instrumentos y tres efectos, todo gratis."}
 ];
+function norm(t){return String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim()}
 function pl(id){return P.filter(function(x){return x.id===id})[0]}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function tarjeta(p){
-  return '<a class="tarjeta" data-cat="'+p.cat+'" data-q="'+esc((p.nombre+" "+p.tipo+" "+p.corto).toLowerCase())+'" href="#/plugin/'+p.id+'" style="--acento:'+p.acento+'">'+
+  return '<a class="tarjeta" data-cat="'+p.cat+'" data-q="'+esc(norm(p.nombre+" "+p.tipo+" "+p.corto))+'" href="#/plugin/'+p.id+'" style="--acento:'+p.acento+'">'+
    (p.nuevo?'<span class="insignia">Nuevo</span>':'')+
    '<div class="media"><img src="img/m/'+p.img+'" width="900" height="'+Math.round(p.h*900/p.w)+'" alt="Interfaz de '+esc(p.nombre)+'" loading="lazy"></div>'+
    '<div class="cuerpo"><span class="tipo">'+esc(p.tipo)+'</span><h3>'+esc(p.nombre)+'</h3><p>'+esc(p.corto)+'</p>'+
@@ -654,38 +672,57 @@ function collage(b){
   return ids.map(function(i){var p=pl(i);return '<img src="img/m/'+p.img+'" width="900" height="'+Math.round(p.h*900/p.w)+'" alt="" loading="lazy">'}).join("");
 }
 function tarjetaBundle(b){
-  return '<a class="bundle" href="#/bundle/'+b.id+'"><div class="collage">'+collage(b)+'</div>'+
+  return '<a class="bundle" data-q="'+esc(norm(b.nombre+" "+b.tipo))+'" href="#/bundle/'+b.id+'"><div class="collage">'+collage(b)+'</div>'+
    '<div class="cuerpo"><span class="tipo">'+esc(b.tipo)+'</span><h3>'+esc(b.nombre)+'</h3><p>'+esc(b.lema)+'</p>'+
    '<div class="ver"><span>Ver bundle</span><span class="gratis">Gratis</span></div></div></a>';
 }
 document.getElementById("rejilla").innerHTML=P.map(tarjeta).join("")+'<p class="vacio" id="vacio" hidden>No hay plugins con ese nombre.</p>';
 document.getElementById("lista-bundles").innerHTML=B.map(tarjetaBundle).join("");
 var vista="todo";
-function pintaCat(v){
-  vista=v;var q=document.getElementById("buscar").value.trim().toLowerCase(),n=0;
+function animarCat(){
+  ["sec-bundles","sec-plugins"].forEach(function(id){
+    var sec=document.getElementById(id);sec.classList.remove("ent");void sec.offsetWidth;
+    var i=0;sec.querySelectorAll(".tarjeta,.bundle").forEach(function(c){if(!c.hidden){c.style.setProperty("--i",i++)}});
+    sec.classList.add("ent");
+  });
+}
+function pintaCat(v,anim){
+  vista=v;var raw=document.getElementById("buscar").value,q=norm(raw),n=0,nb=0;
   var conteo={todo:P.length,bundles:B.length,instrumento:P.filter(function(p){return p.cat==="instrumento"}).length,efecto:P.filter(function(p){return p.cat==="efecto"}).length};
   Object.keys(conteo).forEach(function(k){document.getElementById("n-"+k).textContent=conteo[k]});
   document.querySelectorAll("#lat-nav a").forEach(function(a){a.setAttribute("aria-current",a.dataset.v===v)});
-  var verB=(v==="todo"||v==="bundles"),verP=(v!=="bundles");
-  document.getElementById("sec-bundles").hidden=!verB;
-  document.getElementById("sec-plugins").hidden=!verP;
+  document.querySelectorAll("#lista-bundles .bundle").forEach(function(t){
+    var ok=!q||t.dataset.q.indexOf(q)>-1;t.hidden=!ok;if(ok)nb++;
+  });
   document.querySelectorAll("#rejilla .tarjeta").forEach(function(t){
     var ok=(v==="todo"||t.dataset.cat===v)&&(!q||t.dataset.q.indexOf(q)>-1);
     t.hidden=!ok;if(ok)n++;
   });
-  document.getElementById("vacio").hidden=n>0;
+  var verB=(v==="todo"||v==="bundles")&&nb>0,verP=(v!=="bundles")&&(n>0||(!!q&&nb===0)||!q);
+  document.getElementById("sec-bundles").hidden=!verB;
+  document.getElementById("sec-plugins").hidden=!verP;
+  document.getElementById("vacio").hidden=!(q&&n===0&&nb===0);
   document.getElementById("contador").textContent=n+(n===1?" plugin":" plugins");
-  document.getElementById("tit-plugins").textContent=v==="instrumento"?"Instrumentos":v==="efecto"?"Efectos":"Todos los plugins";
+  document.getElementById("tit-plugins").textContent=q?"Resultados para «"+raw.trim()+"»":(v==="instrumento"?"Instrumentos":v==="efecto"?"Efectos":"Todos los plugins");
   var tit={todo:["Plugins","Instrumentos y efectos VST3 para música pesada. Todos gratis, todos hechos para Windows y FL Studio."],
    bundles:["Bundles","Todo junto: elige un paquete y descarga varios plugins de una vez."],
    instrumento:["Instrumentos","Un generador de kicks, un sintetizador lead y un generador de bajos."],
    efecto:["Efectos","Compresión, ecualización y distorsión para tu mezcla."]}[v];
   document.getElementById("cat-titulo").textContent=tit[0];document.getElementById("cat-sub").textContent=tit[1];
+  if(anim!==false)animarCat();
 }
-document.getElementById("buscar").addEventListener("input",function(){
+var bus=document.getElementById("buscar");
+bus.addEventListener("input",function(){
   if(vista==="bundles"){location.hash="#/plugins";return}
-  pintaCat(vista);
+  pintaCat(vista,false);
 });
+bus.addEventListener("keydown",function(e){
+  if(e.key!=="Enter")return;e.preventDefault();
+  if(vista==="bundles"){location.hash="#/plugins"}else{pintaCat(vista,true)}
+  bus.blur();
+  setTimeout(function(){var t=document.querySelector("#sec-plugins:not([hidden])")||document.querySelector("#sec-bundles:not([hidden])");if(t)t.scrollIntoView({behavior:"smooth",block:"start"})},60);
+});
+bus.addEventListener("search",function(){pintaCat(vista,false)});
 pintaCat("todo");
 
 function bajar(url){
@@ -805,7 +842,11 @@ if(esc1&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&matchMedia("(ho
   });
   por.addEventListener("pointerleave",function(){esc1.querySelectorAll("img").forEach(function(im){im.style.transform=""})});
 }
-window.addEventListener("hashchange",function(){ruta();var m=document.getElementById("contenido");if(m&&!/^#\/(aviso|instalar|preguntas)$/.test(location.hash)){m.focus({preventScroll:true})}});ruta();
+var sinMov=matchMedia("(prefers-reduced-motion:reduce)").matches;
+window.addEventListener("hashchange",function(){
+  var hacer=function(){ruta();var m=document.getElementById("contenido");if(m&&!/^#\/(aviso|instalar|preguntas)$/.test(location.hash)){m.focus({preventScroll:true})}};
+  if(!sinMov&&document.startViewTransition){document.startViewTransition(hacer)}else{hacer()}
+});ruta();
 </script>
 </body>
 </html>
