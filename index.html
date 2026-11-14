@@ -7,8 +7,20 @@
 <meta name="description" content="Seis plugins VST3 gratis para Windows y FL Studio: generador de kicks, sintetizador lead, generador de bajos, compresor, ecualizador y distorsión. Hechos para gabber, hardcore, hardstyle y rave.">
 <meta property="og:title" content="Injustice Audio · Plugins gratis para gabber y hardcore">
 <meta property="og:description" content="Kicks, leads, bajos, compresor, EQ y distorsión VST3. Descarga gratis.">
-<meta property="og:image" content="img/lowcore.jpg">
-<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://carloz78.github.io/injustice-audio/">
+<meta property="og:image" content="https://carloz78.github.io/injustice-audio/img/lowcore.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://carloz78.github.io/injustice-audio/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Plugins de Injustice Audio","itemListElement":[
+{"@type":"ListItem","position":1,"item":{"@type":"SoftwareApplication","name":"GabberDrive","applicationCategory":"MultimediaApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},
+{"@type":"ListItem","position":2,"item":{"@type":"SoftwareApplication","name":"Ravecore","applicationCategory":"MultimediaApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},
+{"@type":"ListItem","position":3,"item":{"@type":"SoftwareApplication","name":"Lowcore","applicationCategory":"MultimediaApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},
+{"@type":"ListItem","position":4,"item":{"@type":"SoftwareApplication","name":"Comp Core","applicationCategory":"MultimediaApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},
+{"@type":"ListItem","position":5,"item":{"@type":"SoftwareApplication","name":"EQ Guide","applicationCategory":"MultimediaApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}},
+{"@type":"ListItem","position":6,"item":{"@type":"SoftwareApplication","name":"Distortion Core","applicationCategory":"MultimediaApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}}]}</script>
+<meta name="theme-color" content="#0c0d0f">
+<link rel="icon" href="img/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Big+Shoulders+Display:wght@600;800;900&display=swap" rel="stylesheet">
@@ -33,7 +45,7 @@ button{font:inherit;color:inherit}
 header.sitio{position:sticky;top:0;z-index:20;background:rgba(12,13,15,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 header.sitio .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
 .marca{display:flex;align-items:center;gap:12px;text-decoration:none}
-.marca img{height:34px;width:auto}
+.marca img{height:40px;width:auto}
 .marca b{font:800 1.3rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase}
 .marca b span{color:var(--brass)}
 nav.principal{display:flex;align-items:center;gap:28px;font-weight:500;font-size:.98rem}
@@ -84,13 +96,16 @@ p.intro{max-width:40rem;margin-top:14px;color:var(--mut);font-size:1.1rem}
 .tarjeta h3{font:800 2rem/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
 .tarjeta p{color:var(--mut);font-size:1rem}
 .tarjeta .ver{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:.95rem}
-.tarjeta .gratis{color:#111;background:var(--acento);padding:3px 11px;border-radius:999px;font-size:.82rem;font-weight:700}
+.tarjeta .gratis{color:#111;background:var(--acento);padding:3px 11px;border-radius:999px;font-size:.82rem;font-weight:700;text-decoration:none}
+.tarjeta .ver a{text-decoration:none}
+.tarjeta .ver a.gratis:hover{filter:brightness(1.1)}
 .tarjeta[hidden]{display:none}
 
 /* detalle */
-#vista-plugin{display:none}
-body.en-plugin #vista-inicio{display:none}
+#vista-plugin,#vista-catalogo{display:none}
+body.en-plugin #vista-inicio,body.en-catalogo #vista-inicio{display:none}
 body.en-plugin #vista-plugin{display:block}
+body.en-catalogo #vista-catalogo{display:block}
 .migas{padding:26px 0 0;color:var(--mut);font-size:.95rem}
 .migas a{text-decoration:none}
 .migas a:hover{color:var(--text)}
@@ -157,9 +172,61 @@ details p{padding:0 0 20px;color:var(--mut);max-width:40rem}
 
 footer.sitio{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--mut);font-size:.96rem}
 footer.sitio .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
-footer.sitio img{height:44px;width:auto}
+footer.sitio img{height:52px;width:auto}
 footer.sitio a{color:var(--text)}
 
+
+/* nuevo: insignias, bundles, buscador, visor, cierre, pie */
+.insignia{position:absolute;top:14px;left:14px;z-index:2;background:var(--brass);color:#111;font:800 .8rem/1 var(--display);letter-spacing:.12em;text-transform:uppercase;padding:6px 11px;border-radius:999px}
+.cat-cab{padding:56px 0 8px}
+.cat-cab h1{font:900 clamp(3rem,8vw,5.6rem)/.88 var(--display);text-transform:uppercase}
+.cat-cab p{max-width:38rem;margin-top:14px;color:var(--mut);font-size:1.15rem}
+.sub-titulo{font:800 1.6rem/1 var(--display);text-transform:uppercase;letter-spacing:.06em;color:var(--brass);margin:0 0 20px}
+.bundles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.bundle{position:relative;display:flex;flex-direction:column;background:linear-gradient(160deg,#1c1a15,#121315 60%);border:1px solid #3a3326;border-radius:16px;overflow:hidden;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.bundle:hover{transform:translateY(-4px);border-color:var(--brass);box-shadow:0 26px 54px -26px var(--brass)}
+.bundle .collage{position:relative;aspect-ratio:16/10;background:radial-gradient(70% 80% at 50% 45%,rgba(216,184,120,.2),transparent 75%)}
+.bundle .collage img{position:absolute;width:56%;border-radius:6px;border:1px solid #ffffff22;box-shadow:0 18px 34px -12px #000}
+.bundle .collage img:nth-child(1){left:6%;top:14%;z-index:1}
+.bundle .collage img:nth-child(2){left:30%;top:8%;z-index:2}
+.bundle .collage img:nth-child(3){right:6%;top:34%;z-index:3}
+.bundle .cuerpo{padding:20px 24px 24px;display:flex;flex-direction:column;gap:6px;border-top:1px solid #3a3326;flex:1}
+.bundle .tipo{color:var(--brass);font-weight:600;font-size:.92rem}
+.bundle h3{font:800 1.9rem/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.bundle p{color:var(--mut)}
+.bundle .ver{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:.95rem}
+.bundle .gratis{color:#111;background:var(--brass);padding:3px 11px;border-radius:999px;font-size:.82rem;font-weight:700}
+.herramientas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin:56px 0 22px}
+.buscador{flex:1 1 240px;max-width:340px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:10px 18px;color:var(--text);font:inherit}
+.buscador::placeholder{color:var(--mut)}
+.buscador:focus-visible{outline-offset:2px}
+.vacio{grid-column:1/-1;color:var(--mut);padding:30px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:.92rem;color:#d3d0c9;background:var(--panel)}
+.escenario img{cursor:zoom-in}
+.visor{position:fixed;inset:0;z-index:50;background:rgba(5,5,6,.92);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.visor.abierto{display:flex}
+.visor img{max-width:100%;max-height:100%;width:auto;height:auto;border-radius:8px;box-shadow:0 0 120px -30px var(--brass)}
+.vecinos{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:64px;border-top:1px solid var(--line);padding-top:28px}
+.vecinos a{text-decoration:none;display:flex;flex-direction:column;gap:2px}
+.vecinos a small{color:var(--mut)}
+.vecinos a b{font:800 1.8rem/1 var(--display);text-transform:uppercase}
+.vecinos a:hover b{color:var(--acento)}
+.vecinos a:last-child{text-align:right}
+.incluido{margin-top:18px;color:var(--mut);font-size:.96rem}
+.incluido a{color:var(--brass)}
+.cierre{background:radial-gradient(700px 300px at 50% 100%,rgba(216,184,120,.16),transparent 70%),var(--panel);border-top:1px solid var(--line);text-align:center;padding:84px 0}
+.cierre h2{font:900 clamp(2.4rem,6vw,4.2rem)/.92 var(--display);text-transform:uppercase}
+.cierre p{max-width:34rem;margin:16px auto 28px;color:var(--mut);font-size:1.12rem}
+.cierre .acciones{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.pie-col{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px;width:100%}
+.pie-col h4{font:800 1rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--text);margin-bottom:14px}
+.pie-col a{display:block;text-decoration:none;color:var(--mut);padding:4px 0}
+.pie-col a:hover{color:var(--text)}
+.pie-fin{width:100%;border-top:1px solid var(--line);margin-top:34px;padding-top:22px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.9rem}
+.nota-bundle{margin-top:10px;color:var(--mut);font-size:.92rem;max-width:26rem}
+@media (max-width:980px){.bundles{grid-template-columns:1fr 1fr}.pie-col{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.bundles{grid-template-columns:1fr}.vecinos{grid-template-columns:1fr}.vecinos a:last-child{text-align:left}.pie-col{grid-template-columns:1fr}}
 @media (max-width:980px){
   .rejilla{grid-template-columns:repeat(2,1fr)}
   .portada .wrap{grid-template-columns:1fr}
@@ -179,18 +246,185 @@ footer.sitio a{color:var(--text)}
   html{scroll-behavior:auto}
   .tarjeta,.boton{transition:none}
 }
+
+/* ===== pulido v4 ===== */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+header.sitio,main,footer.sitio{position:relative;z-index:1}
+header.sitio{z-index:30}
+header.sitio.scrolled{box-shadow:0 10px 30px -18px #000;background:rgba(12,13,15,.94)}
+.salto{position:absolute;left:12px;top:-60px;z-index:60;background:var(--brass);color:#111;padding:10px 16px;border-radius:8px;font-weight:600;text-decoration:none}
+.salto:focus{top:10px}
+.boton{background:linear-gradient(180deg,color-mix(in srgb,var(--acento) 80%,#fff),var(--acento));box-shadow:inset 0 1px 0 #ffffff66,0 10px 26px -12px var(--acento)}
+.boton.fantasma{background:transparent;box-shadow:none}
+.marca img{transition:transform .3s}
+.marca:hover img{transform:rotate(-4deg) scale(1.06)}
+nav.principal a[aria-current="page"]{color:var(--text)}
+.menu{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:transparent;cursor:pointer;align-items:center;justify-content:center}
+.menu span,.menu span::before,.menu span::after{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;position:relative;transition:transform .2s,background .2s}
+.menu span::before,.menu span::after{content:"";position:absolute;left:0}
+.menu span::before{top:-6px}.menu span::after{top:6px}
+body.menu-abierto .menu span{background:transparent}
+body.menu-abierto .menu span::before{transform:translateY(6px) rotate(45deg)}
+body.menu-abierto .menu span::after{transform:translateY(-6px) rotate(-45deg)}
+
+/* portada */
+.portada{padding-bottom:0}
+.portada .wrap{padding-bottom:72px}
+.portada::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent);opacity:.5}
+.portada h1{text-shadow:0 2px 0 #000}
+.escena{perspective:1200px}
+.escena img{transition:transform .25s ease-out;animation:sube .9s cubic-bezier(.2,.7,.2,1) both}
+.escena .e1{animation-delay:.05s}.escena .e2{animation-delay:.22s}.escena .e3{animation-delay:.4s}
+@keyframes sube{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:none}}
+.generos{border-top:1px solid var(--line);background:rgba(10,10,11,.6);position:relative;z-index:1}
+.generos .wrap{display:flex;flex-wrap:wrap;gap:10px 34px;align-items:center;justify-content:center;padding:18px 0;font:700 1.05rem/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.generos .wrap span{display:inline-flex;align-items:center;gap:34px}
+.generos .wrap span+span::before{content:"";width:7px;height:7px;background:var(--brass);transform:rotate(45deg);opacity:.8;margin-right:0}
+
+/* tarjetas */
+.tarjeta .media{overflow:hidden}
+.tarjeta .media img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.tarjeta:hover .media img{transform:scale(1.04)}
+.tarjeta .ver span:first-child::after,.bundle .ver span:first-child::after{content:" →";display:inline-block;transition:transform .2s}
+.tarjeta:hover .ver span:first-child::after,.bundle:hover .ver span:first-child::after{transform:translateX(4px)}
+.contador{color:var(--mut);font-size:.95rem}
+
+/* detalle */
+.escenario{position:relative}
+.ampliar{position:absolute;right:clamp(14px,2vw,26px);bottom:clamp(14px,2vw,26px);z-index:2;background:rgba(10,10,11,.78);border:1px solid #ffffff2a;color:var(--text);border-radius:999px;padding:8px 16px;font-size:.9rem;cursor:zoom-in;backdrop-filter:blur(6px)}
+.ampliar:hover{border-color:var(--text)}
+.barra-desc{position:fixed;left:0;right:0;top:68px;z-index:25;background:rgba(12,13,15,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transform:translateY(-120%);transition:transform .25s;pointer-events:none}
+.barra-desc.ver{transform:none;pointer-events:auto}
+.barra-desc .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0}
+.barra-desc b{font:800 1.4rem/1 var(--display);text-transform:uppercase;letter-spacing:.04em}
+.barra-desc small{color:var(--mut);margin-left:12px}
+.barra-desc .boton{padding:10px 22px;font-size:.95rem}
+.det-cols .caract li{transition:padding .2s}
+.det-cols .caract li:hover{padding-left:34px}
+
+/* inicio: aviso */
+.aviso{position:relative}
+.aviso::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--brass)}
+.por-que>div{border-top:1px solid var(--line);padding-top:16px}
+
+@media (max-width:640px){
+  .menu{display:inline-flex}
+  nav.principal{position:absolute;left:0;right:0;top:68px;background:#0c0d0f;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0;padding:8px 20px 20px;display:none}
+  body.menu-abierto nav.principal{display:flex}
+  nav.principal a:not(.cta){display:block!important;padding:14px 0;border-bottom:1px solid var(--line);font-size:1.1rem}
+  nav.principal a.cta{margin-top:16px;text-align:center;padding:14px}
+  .barra-desc small{display:none}
+  .marca b{font-size:1.05rem;letter-spacing:.1em;white-space:nowrap}
+  .marca img{height:32px}
+  .generos .wrap{gap:8px 18px;font-size:.9rem;letter-spacing:.14em}
+  .generos .wrap span{gap:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  .escena img{animation:none}
+  .tarjeta .media img,.barra-desc,.marca img{transition:none}
+}
+
+/* ===== v5: acordeones, cue, aviso corto, barra lateral ===== */
+.importante{display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(180deg,#e2c689,var(--brass));color:#14120d;text-decoration:none;padding:13px 20px;font-weight:600;position:relative;z-index:1}
+.importante b{font:800 .95rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;background:#14120d;color:var(--brass);padding:5px 10px;border-radius:999px}
+.importante span{display:inline-block;font-size:1.2rem;animation:baja 1.6s ease-in-out infinite}
+@keyframes baja{0%,100%{transform:translateY(-2px)}50%{transform:translateY(4px)}}
+.importante:hover{filter:brightness(1.06)}
+.portada::after{display:none}
+.aviso{padding:56px 0 60px}
+.aviso.bloque{padding:56px 0 60px}
+.aviso .titulo{font-size:clamp(2rem,4.6vw,3rem);max-width:none}
+.aviso .intro{margin-top:12px;font-size:1.05rem}
+.aviso .pantallas{margin-top:26px;gap:20px}
+.aviso .paso-win h3{font-size:1.2rem;display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.aviso .paso-win h3 i{font:900 1rem/1 var(--display);font-style:normal;background:var(--brass);color:#111;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center}
+.aviso .win{min-height:0;padding:20px 22px;gap:8px}
+.aviso .win b.t{font-size:1.15rem}
+.aviso .win .fila{margin-top:10px}
+.aviso .por-que{margin-top:26px;gap:20px}
+.aviso .por-que h3{font-size:1.05rem}
+.aviso .por-que p{font-size:.95rem}
+.ayuda{padding:56px 0 72px}
+.ayuda .wrap{display:grid;gap:16px;max-width:900px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;transition:border-color .2s}
+.panel:hover,.panel[open]{border-color:#4a4333}
+.panel>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 28px;cursor:pointer;list-style:none}
+.panel>summary::-webkit-details-marker{display:none}
+.panel>summary::after{content:"";flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:no-repeat center/18px url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d8b878' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");transition:transform .25s,background-color .2s;position:static;translate:none;font:inherit}
+.panel[open]>summary::after{content:"";transform:rotate(180deg);background-color:#d8b87822}
+.panel>summary:hover::after{border-color:var(--brass)}
+.pt{display:flex;flex-direction:column;gap:2px}
+.pt b{font:900 clamp(1.7rem,4vw,2.4rem)/1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.pt small{color:var(--mut);font-size:1rem}
+.panel-cuerpo{padding:0 28px 26px}
+.panel .pasos{margin-top:12px;max-width:none}
+.panel .preguntas{margin-top:0;max-width:none}
+.panel .preguntas details:first-child{border-top:0}
+.panel .preguntas details:last-child{border-bottom:0}
+
+/* catalogo con barra lateral */
+.cat-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:44px;align-items:start}
+.lateral{position:sticky;top:92px;display:grid;gap:18px}
+.lateral .buscador{max-width:none;width:100%}
+#lat-nav{display:grid;gap:4px}
+#lat-nav a{display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:var(--mut);padding:12px 16px;border-radius:12px;border-left:3px solid transparent;font-weight:500;font-size:1.05rem}
+#lat-nav a small{font-size:.85rem;background:var(--panel2);border-radius:999px;padding:2px 9px;color:var(--mut)}
+#lat-nav a:hover{color:var(--text);background:var(--panel)}
+#lat-nav a[aria-current="true"]{color:var(--text);background:var(--panel);border-left-color:var(--brass)}
+#lat-nav a[aria-current="true"] small{background:var(--brass);color:#111;font-weight:700}
+.cat-main{display:grid;gap:56px;min-width:0}
+.cab-plugins{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px}
+.cat-main .rejilla{grid-template-columns:repeat(2,1fr)}
+.cat-main .bundles{grid-template-columns:repeat(2,1fr)}
+.cat-main .bundles .bundle:nth-child(3){grid-column:1/-1;flex-direction:row}
+.cat-main .bundles .bundle:nth-child(3) .collage{flex:1.1;aspect-ratio:auto;min-height:260px}
+.cat-main .bundles .bundle:nth-child(3) .cuerpo{flex:1;border-top:0;border-left:1px solid #3a3326;justify-content:center}
+@media (max-width:1100px){.cat-layout{grid-template-columns:190px minmax(0,1fr);gap:28px}}
+@media (max-width:860px){
+  .cat-layout{grid-template-columns:1fr;gap:22px}
+  .lateral{position:static}
+  #lat-nav{display:flex;flex-wrap:wrap;gap:8px}
+  #lat-nav a{border:1px solid var(--line);border-radius:999px;padding:8px 16px}
+  #lat-nav a[aria-current="true"]{border-color:var(--brass)}
+  .cat-main .rejilla,.cat-main .bundles{grid-template-columns:1fr}
+  .cat-main .bundles .bundle:nth-child(3){flex-direction:column}
+  .cat-main .bundles .bundle:nth-child(3) .collage{aspect-ratio:16/10;min-height:0}
+  .cat-main .bundles .bundle:nth-child(3) .cuerpo{border-left:0;border-top:1px solid #3a3326}
+}
+@media (max-width:640px){
+  .panel>summary{padding:18px 18px}.panel-cuerpo{padding:0 18px 20px}
+  .importante{font-size:.95rem;padding:12px 14px;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){.importante span{animation:none}.panel>summary::after{transition:none}}
+
+/* ===== v6 ===== */
+.estado-desc{margin:0 0 28px;background:var(--panel);border:1px solid #4a4333;border-radius:16px;padding:22px 26px}
+.estado-desc[hidden]{display:none}
+.estado-desc h2{font:800 1.3rem/1 var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--brass);margin-bottom:6px}
+.estado-desc p{color:var(--mut);font-size:.98rem;margin-bottom:14px}
+.estado-desc ul{list-style:none;padding:0;display:grid;gap:0}
+.estado-desc li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+.estado-desc li b{font-weight:600}
+.estado-desc li span{color:var(--mut);font-size:.92rem;margin-left:10px}
+.estado-desc li a{color:#111;background:var(--brass);padding:5px 14px;border-radius:999px;font-weight:700;font-size:.85rem;text-decoration:none}
+.estado-desc li.listo span{color:#7fe08a}
+.compartir{background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 16px;color:var(--mut);cursor:pointer;font-size:.92rem}
+.compartir:hover{color:var(--text);border-color:var(--text)}
 </style>
 </head>
 <body>
+<a class="salto" href="#contenido">Saltar al contenido</a>
 
 <header class="sitio">
   <div class="wrap">
     <a class="marca" href="#/" aria-label="Injustice Audio, inicio">
-      <img src="img/logo.svg" alt="" width="57" height="34">
+      <img src="img/logo-chico.png" alt="" width="70" height="40">
       <b>Injustice <span>Audio</span></b>
     </a>
-    <nav class="principal" aria-label="Principal">
+    <button type="button" class="menu" id="menu" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav"><span></span></button>
+    <nav class="principal" id="nav" aria-label="Principal">
       <a href="#/plugins">Plugins</a>
+      <a href="#/bundles">Bundles</a>
       <a href="#/instalar">Instalar</a>
       <a href="#/preguntas">Preguntas</a>
       <a class="cta" href="#/plugins">Descargar gratis</a>
@@ -198,7 +432,7 @@ footer.sitio a{color:var(--text)}
   </div>
 </header>
 
-<main>
+<main id="contenido" tabindex="-1">
 <!-- INICIO -->
 <div id="vista-inicio">
 
@@ -208,7 +442,7 @@ footer.sitio a{color:var(--text)}
       <h1>Pesado.<br>Rápido.<span>Gratis.</span></h1>
       <p class="sub">Plugins VST3 para Windows hechos para gabber, hardcore, hardstyle y rave. Kicks, leads, bajos, compresor, ecualizador y distorsión, sin costo y sin registro.</p>
       <div class="acciones">
-        <a class="boton" href="#/plugins">Explorar plugins</a>
+        <a class="boton" href="#/plugins">Ver plugins</a>
         <a class="boton fantasma" href="#/instalar">Cómo instalar</a>
       </div>
       <div class="cifras">
@@ -218,88 +452,117 @@ footer.sitio a{color:var(--text)}
       </div>
     </div>
     <div class="escena" aria-hidden="true">
-      <img class="e1" src="img/lowcore.jpg" alt="" width="2340" height="1318">
-      <img class="e2" src="img/compcore.jpg" alt="" width="2000" height="1000">
-      <img class="e3" src="img/gabberdrive.jpg" alt="" width="1520" height="1080">
+      <img class="e1" src="img/m/lowcore.jpg" alt="" width="900" height="507" fetchpriority="high">
+      <img class="e2" src="img/m/compcore.jpg" alt="" width="900" height="450">
+      <img class="e3" src="img/m/gabberdrive.jpg" alt="" width="900" height="640">
     </div>
   </div>
-</section>
-
-<section class="bloque" id="plugins" style="padding-top:64px">
-  <div class="wrap">
-    <div class="encabezado">
-      <div>
-        <h2 class="titulo">Los plugins</h2>
-        <p class="intro">Pulsa un plugin para ver cómo es por dentro, qué hace y descargarlo.</p>
-      </div>
-      <div class="filtros" role="group" aria-label="Filtrar plugins">
-        <button type="button" data-f="todos" aria-pressed="true">Todos</button>
-        <button type="button" data-f="instrumento" aria-pressed="false">Instrumentos</button>
-        <button type="button" data-f="efecto" aria-pressed="false">Efectos</button>
-      </div>
-    </div>
-    <div class="rejilla" id="rejilla"></div>
+  <div class="generos" aria-label="Géneros">
+    <div class="wrap"><span>Gabber</span><span>Hardcore</span><span>Hardstyle</span><span>Hard dance</span><span>Trance</span><span>Rave</span><span>Electro</span></div>
   </div>
+  <a class="importante" href="#/aviso"><b>Importante</b> Lee esto antes de instalar <span aria-hidden="true">↓</span></a>
 </section>
 
 <section class="bloque aviso" id="aviso-windows">
   <div class="wrap">
-    <span class="etiqueta">Aviso de Windows</span>
-    <h2 class="titulo">Windows te va a avisar.<br>Es normal.</h2>
-    <p class="intro">Al abrir el instalador, Windows puede mostrar «Windows protegió su PC». Pasa con casi cualquier programa pequeño que no viene de una empresa grande. Puedes continuar con estos dos clics.</p>
+    <span class="etiqueta">Importante · leer antes de instalar</span>
+    <h2 class="titulo">Windows te va a avisar. Es normal.</h2>
+    <p class="intro">Al abrir el instalador puede salir «Windows protegió su PC». Pasa con casi cualquier programa pequeño y gratuito. Sigue estos dos clics:</p>
     <div class="pantallas">
       <div class="paso-win">
-        <h3>1. Pulsa «Más información»</h3>
+        <h3><i>1</i> Pulsa «Más información»</h3>
         <div class="win" role="img" aria-label="Ventana de Windows que dice Windows protegió su PC, con el enlace Más información resaltado">
           <b class="t">Windows protegió su PC</b>
-          <span class="c">Microsoft Defender SmartScreen impidió el inicio de una aplicación desconocida. Ejecutar esta aplicación podría poner en riesgo su PC.</span>
+          <span class="c">Microsoft Defender SmartScreen impidió el inicio de una aplicación desconocida.</span>
           <span class="enlace resalte">Más información</span>
           <div class="fila"><span class="b">No ejecutar</span></div>
         </div>
-        <p>El botón «Ejecutar de todas formas» todavía no aparece.</p>
       </div>
       <div class="paso-win">
-        <h3>2. Pulsa «Ejecutar de todas formas»</h3>
+        <h3><i>2</i> Pulsa «Ejecutar de todas formas»</h3>
         <div class="win" role="img" aria-label="La misma ventana de Windows, ahora con el botón Ejecutar de todas formas resaltado">
           <b class="t">Windows protegió su PC</b>
           <span class="c">Aplicación: Setup.exe<br>Editor: Editor desconocido</span>
           <div class="fila"><span class="b fuerte resalte">Ejecutar de todas formas</span><span class="b">No ejecutar</span></div>
         </div>
-        <p>Se abre el instalador normal. Pulsa «Siguiente» hasta terminar.</p>
       </div>
     </div>
     <div class="por-que">
-      <div><h3>¿Por qué sale el aviso?</h3><p>Los instaladores necesitan una firma digital de pago para que Windows los reconozca. Estos plugins son gratis y no la tienen todavía.</p></div>
-      <div><h3>¿Qué hace el instalador?</h3><p>Solo copia el plugin a la carpeta de plugins VST3 de tu PC. No instala nada más.</p></div>
-      <div><h3>¿Y si Chrome bloquea la descarga?</h3><p>Chrome puede decir «Este archivo es peligroso» por la misma razón. Elige «Conservar», o descarga con Microsoft Edge.</p></div>
+      <div><h3>¿Por qué sale?</h3><p>La firma digital que Windows reconoce es de pago. Estos plugins son gratis y aún no la tienen.</p></div>
+      <div><h3>¿Qué hace el instalador?</h3><p>Solo copia el plugin a tu carpeta VST3. No instala nada más.</p></div>
+      <div><h3>¿Chrome lo bloquea?</h3><p>Elige «Conservar», o descarga con Microsoft Edge.</p></div>
     </div>
   </div>
 </section>
 
-<section class="bloque" id="instalar">
+<section class="bloque ayuda">
   <div class="wrap">
-    <h2 class="titulo">Instala en cinco pasos</h2>
-    <p class="intro">Funciona igual para todos los plugins. Los ejemplos son de FL Studio, pero cualquier programa que abra VST3 los puede cargar.</p>
-    <ol class="pasos">
-      <li><div><strong>Descarga el instalador</strong><span>Pulsa el botón del plugin que quieras. Se baja un archivo que termina en <code>-Setup.exe</code>.</span></div></li>
-      <li><div><strong>Cierra FL Studio</strong><span>Así detecta el plugin nuevo al abrirse.</span></div></li>
-      <li><div><strong>Abre el instalador</strong><span>Si Windows muestra el aviso, sigue los dos clics de arriba. Después pulsa «Siguiente» hasta terminar.</span></div></li>
-      <li><div><strong>Busca plugins nuevos</strong><span>Abre FL Studio y ve a <code>Options</code>, <code>Manage plugins</code> y pulsa <code>Find installed plugins</code>.</span></div></li>
-      <li><div><strong>Cárgalo en tu proyecto</strong><span>Lo encuentras en <code>Plugin database</code>, <code>Installed</code>.</span></div></li>
-    </ol>
+    <details class="panel" id="instalar">
+      <summary><span class="pt"><b>Instala en 5 pasos</b><small>Funciona igual para todos los plugins</small></span></summary>
+      <div class="panel-cuerpo">
+        <p class="intro" style="margin:0 0 6px">Los ejemplos son de FL Studio, pero cualquier programa que abra VST3 los puede cargar.</p>
+        <ol class="pasos">
+          <li><div><strong>Descarga el instalador</strong><span>Pulsa el botón del plugin que quieras. Se baja un archivo que termina en <code>-Setup.exe</code>.</span></div></li>
+          <li><div><strong>Cierra FL Studio</strong><span>Así detecta el plugin nuevo al abrirse.</span></div></li>
+          <li><div><strong>Abre el instalador</strong><span>Si Windows muestra el aviso, sigue los dos clics de arriba. Después pulsa «Siguiente» hasta terminar.</span></div></li>
+          <li><div><strong>Busca plugins nuevos</strong><span>Abre FL Studio y ve a <code>Options</code>, <code>Manage plugins</code> y pulsa <code>Find installed plugins</code>.</span></div></li>
+          <li><div><strong>Cárgalo en tu proyecto</strong><span>Lo encuentras en <code>Plugin database</code>, <code>Installed</code>.</span></div></li>
+        </ol>
+      </div>
+    </details>
+    <details class="panel" id="preguntas">
+      <summary><span class="pt"><b>Preguntas</b><small>Lo que más nos preguntan</small></span></summary>
+      <div class="panel-cuerpo">
+        <div class="preguntas">
+          <details><summary>¿De verdad son gratis?</summary><p>Sí. Todos los plugins se descargan sin pagar y sin registrarte.</p></details>
+          <details><summary>¿Qué es un VST3?</summary><p>Es el formato de plugin que usan los programas de música como FL Studio. Instalas el plugin una vez y lo abres dentro de tu DAW, igual que cualquier otro.</p></details>
+          <details><summary>¿Cómo descargo un bundle?</summary><p>Entra al bundle y pulsa «Descargar los plugins». Se bajan los instaladores uno por uno; si tu navegador pregunta si permites varias descargas, acepta. También puedes bajar cada plugin por separado.</p></details>
+          <details><summary>¿En qué programas funcionan?</summary><p>Están hechos y probados en FL Studio en Windows. Son plugins VST3 de 64 bits, así que otros programas que carguen VST3 también deberían abrirlos.</p></details>
+          <details><summary>¿Funcionan en Mac o en Linux?</summary><p>Por ahora no. Solo hay versión para Windows.</p></details>
+          <details><summary>El plugin no aparece en FL Studio</summary><p>Abre <code>Options</code>, <code>Manage plugins</code> y pulsa <code>Find installed plugins</code> otra vez. Si ya tenías una versión anterior instalada, cierra FL Studio por completo antes de instalar la nueva.</p></details>
+          <details><summary>¿Cómo lo desinstalo?</summary><p>En Windows abre <code>Configuración</code>, <code>Aplicaciones</code>, busca el nombre del plugin y pulsa «Desinstalar».</p></details>
+          <details><summary>Encontré un error o tengo una idea</summary><p>Escríbeme en TikTok, en <a href="https://www.tiktok.com/@injustice7193" rel="noopener">@injustice7193</a>. Cuéntame qué pasó y en qué programa lo usabas.</p></details>
+        </div>
+      </div>
+    </details>
   </div>
 </section>
 
-<section class="bloque" id="preguntas" style="padding-top:0">
+<section class="cierre">
   <div class="wrap">
-    <h2 class="titulo">Preguntas</h2>
-    <div class="preguntas">
-      <details><summary>¿De verdad son gratis?</summary><p>Sí. Todos los plugins se descargan sin pagar y sin registrarte.</p></details>
-      <details><summary>¿En qué programas funcionan?</summary><p>Están hechos y probados en FL Studio en Windows. Son plugins VST3 de 64 bits, así que otros programas que carguen VST3 también deberían abrirlos.</p></details>
-      <details><summary>¿Funcionan en Mac o en Linux?</summary><p>Por ahora no. Solo hay versión para Windows.</p></details>
-      <details><summary>El plugin no aparece en FL Studio</summary><p>Abre <code>Options</code>, <code>Manage plugins</code> y pulsa <code>Find installed plugins</code> otra vez. Si ya tenías una versión anterior instalada, cierra FL Studio por completo antes de instalar la nueva.</p></details>
-      <details><summary>¿Cómo lo desinstalo?</summary><p>En Windows abre <code>Configuración</code>, <code>Aplicaciones</code>, busca el nombre del plugin y pulsa «Desinstalar».</p></details>
-      <details><summary>Encontré un error o tengo una idea</summary><p>Escríbeme en TikTok, en <a href="https://www.tiktok.com/@injustice7193" rel="noopener">@injustice7193</a>. Cuéntame qué pasó y en qué programa lo usabas.</p></details>
+    <h2>Todo el sonido pesado.<br>Cero pesos.</h2>
+    <p>Descarga los plugins por separado o llévate un bundle completo.</p>
+    <div class="acciones"><a class="boton" href="#/bundles">Ver bundles</a><a class="boton fantasma" href="#/plugins">Ver plugins</a></div>
+  </div>
+</section>
+</div>
+
+<!-- CATALOGO -->
+<div id="vista-catalogo">
+<section class="cat-cab"><div class="wrap">
+  <h1 id="cat-titulo">Plugins</h1>
+  <p id="cat-sub">Instrumentos y efectos VST3 para música pesada. Todos gratis, todos hechos para Windows y FL Studio.</p>
+</div></section>
+<section class="bloque" style="padding:36px 0 84px;min-height:60vh">
+  <div class="wrap cat-layout">
+    <aside class="lateral" aria-label="Explorar">
+      <input class="buscador" id="buscar" type="search" placeholder="Buscar plugin" aria-label="Buscar plugin" autocomplete="off">
+      <nav id="lat-nav">
+        <a href="#/plugins" data-v="todo">Todo<small id="n-todo"></small></a>
+        <a href="#/bundles" data-v="bundles">Bundles<small id="n-bundles"></small></a>
+        <a href="#/plugins/instrumento" data-v="instrumento">Instrumentos<small id="n-instrumento"></small></a>
+        <a href="#/plugins/efecto" data-v="efecto">Efectos<small id="n-efecto"></small></a>
+      </nav>
+    </aside>
+    <div class="cat-main">
+      <div id="sec-bundles">
+        <h2 class="sub-titulo">Bundles</h2>
+        <div class="bundles" id="lista-bundles"></div>
+      </div>
+      <div id="sec-plugins">
+        <div class="cab-plugins"><h2 class="sub-titulo" style="margin:0" id="tit-plugins">Todos los plugins</h2><span class="contador" id="contador"></span></div>
+        <div class="rejilla" id="rejilla"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -310,14 +573,21 @@ footer.sitio a{color:var(--text)}
 </main>
 
 <footer class="sitio">
-  <div class="wrap">
-    <div style="display:flex;align-items:center;gap:16px">
-      <img src="img/logo.svg" alt="" width="73" height="44">
-      <div><strong style="color:var(--text)">Injustice Audio</strong><br>Plugins gratis para gabber y hardcore.</div>
+  <div class="wrap" style="flex-direction:column;align-items:stretch">
+    <div class="pie-col">
+      <div>
+        <img src="img/logo-chico.png" alt="" width="91" height="52" style="margin-bottom:14px">
+        <p style="max-width:20rem">Plugins gratis para gabber, hardcore, hardstyle y rave. Hechos en México.</p>
+      </div>
+      <div><h4>Plugins</h4><a href="#/plugin/gabberdrive">GabberDrive</a><a href="#/plugin/ravecore">Ravecore</a><a href="#/plugin/lowcore">Lowcore</a><a href="#/plugin/comp-core">Comp Core</a><a href="#/plugin/eq-guide">EQ Guide</a><a href="#/plugin/distortion-core">Distortion Core</a></div>
+      <div><h4>Bundles</h4><a href="#/bundle/instrumentos">Bundle de instrumentos</a><a href="#/bundle/efectos">Bundle de efectos</a><a href="#/bundle/completo">Colección completa</a></div>
+      <div><h4>Ayuda</h4><a href="#/aviso">Aviso de Windows</a><a href="#/instalar">Cómo instalar</a><a href="#/preguntas">Preguntas</a><a href="https://www.tiktok.com/@injustice7193" rel="noopener">TikTok @injustice7193</a></div>
     </div>
-    <div style="text-align:right"><a href="https://www.tiktok.com/@injustice7193" rel="noopener">TikTok @injustice7193</a><br>Hecho con JUCE.</div>
+    <div class="pie-fin"><span>© Injustice Audio. Todos los plugins son gratis.</span><span>Hecho con JUCE · VST3 · Windows 64 bits</span></div>
   </div>
 </footer>
+
+<div class="visor" id="visor" role="dialog" aria-label="Imagen ampliada"><img id="visor-img" alt=""></div>
 
 <script>
 var BASE="https://github.com/carloz78/injustice-audio/releases/latest/download/";
@@ -353,52 +623,189 @@ var P=[
   car:["6 estilos con 99 bajos cada uno","Sub limpio, filtro, distorsión y pitch env","Macros: Aggression, Weight, Movement y Character","Graves siempre al centro y volumen parejo","Guarda y carga tus propios presets"],
   arch:"LOWCORE-Setup.exe"}
 ];
+var EXTRA={
+ "comp-core":{nuevo:1,ideal:["Kicks","Bajos","Bus de rave","Drum bus","Master"]},
+ "eq-guide":{nuevo:1,ideal:["Aprender a ecualizar","Kicks","Voces","Master"]},
+ "distortion-core":{nuevo:1,ideal:["Kicks","Bajos","Leads","Drum bus"]},
+ "gabberdrive":{ideal:["Kicks de gabber","Gabberpop"]},
+ "ravecore":{ideal:["Leads","Gabber pop","Hardstyle","Trance","Rave"]},
+ "lowcore":{ideal:["Gabber","Hardcore","Hardstyle"]}
+};
+P.forEach(function(p){var e=EXTRA[p.id]||{};p.nuevo=!!e.nuevo;p.ideal=e.ideal||[]});
+var B=[
+ {id:"instrumentos",nombre:"Bundle de instrumentos",tipo:"3 instrumentos",items:["gabberdrive","ravecore","lowcore"],
+  lema:"Kick, lead y bajo: la base de un track de gabber en tres plugins."},
+ {id:"efectos",nombre:"Bundle de efectos",tipo:"3 efectos",items:["comp-core","eq-guide","distortion-core"],
+  lema:"Compresión, ecualización y distorsión para darle cuerpo y agresividad a tu mezcla."},
+ {id:"completo",nombre:"Colección completa",tipo:"6 plugins",items:["gabberdrive","ravecore","lowcore","comp-core","eq-guide","distortion-core"],
+  lema:"Todo Injustice Audio de una vez: tres instrumentos y tres efectos, todo gratis."}
+];
+function pl(id){return P.filter(function(x){return x.id===id})[0]}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function tarjeta(p){
-  return '<a class="tarjeta" data-cat="'+p.cat+'" href="#/plugin/'+p.id+'" style="--acento:'+p.acento+'">'+
-   '<div class="media"><img src="img/'+p.img+'" width="'+p.w+'" height="'+p.h+'" alt="Interfaz de '+esc(p.nombre)+'" loading="lazy"></div>'+
+  return '<a class="tarjeta" data-cat="'+p.cat+'" data-q="'+esc((p.nombre+" "+p.tipo+" "+p.corto).toLowerCase())+'" href="#/plugin/'+p.id+'" style="--acento:'+p.acento+'">'+
+   (p.nuevo?'<span class="insignia">Nuevo</span>':'')+
+   '<div class="media"><img src="img/m/'+p.img+'" width="900" height="'+Math.round(p.h*900/p.w)+'" alt="Interfaz de '+esc(p.nombre)+'" loading="lazy"></div>'+
    '<div class="cuerpo"><span class="tipo">'+esc(p.tipo)+'</span><h3>'+esc(p.nombre)+'</h3><p>'+esc(p.corto)+'</p>'+
    '<div class="ver"><span>Ver plugin</span><span class="gratis">Gratis</span></div></div></a>';
 }
-document.getElementById("rejilla").innerHTML=P.map(tarjeta).join("");
-document.querySelectorAll(".filtros button").forEach(function(b){
-  b.addEventListener("click",function(){
-    document.querySelectorAll(".filtros button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
-    var f=b.dataset.f;
-    document.querySelectorAll("#rejilla .tarjeta").forEach(function(t){t.hidden=!(f==="todos"||t.dataset.cat===f)});
+function collage(b){
+  var ids=b.id==="completo"?["lowcore","comp-core","gabberdrive"]:b.items;
+  return ids.map(function(i){var p=pl(i);return '<img src="img/m/'+p.img+'" width="900" height="'+Math.round(p.h*900/p.w)+'" alt="" loading="lazy">'}).join("");
+}
+function tarjetaBundle(b){
+  return '<a class="bundle" href="#/bundle/'+b.id+'"><div class="collage">'+collage(b)+'</div>'+
+   '<div class="cuerpo"><span class="tipo">'+esc(b.tipo)+'</span><h3>'+esc(b.nombre)+'</h3><p>'+esc(b.lema)+'</p>'+
+   '<div class="ver"><span>Ver bundle</span><span class="gratis">Gratis</span></div></div></a>';
+}
+document.getElementById("rejilla").innerHTML=P.map(tarjeta).join("")+'<p class="vacio" id="vacio" hidden>No hay plugins con ese nombre.</p>';
+document.getElementById("lista-bundles").innerHTML=B.map(tarjetaBundle).join("");
+var vista="todo";
+function pintaCat(v){
+  vista=v;var q=document.getElementById("buscar").value.trim().toLowerCase(),n=0;
+  var conteo={todo:P.length,bundles:B.length,instrumento:P.filter(function(p){return p.cat==="instrumento"}).length,efecto:P.filter(function(p){return p.cat==="efecto"}).length};
+  Object.keys(conteo).forEach(function(k){document.getElementById("n-"+k).textContent=conteo[k]});
+  document.querySelectorAll("#lat-nav a").forEach(function(a){a.setAttribute("aria-current",a.dataset.v===v)});
+  var verB=(v==="todo"||v==="bundles"),verP=(v!=="bundles");
+  document.getElementById("sec-bundles").hidden=!verB;
+  document.getElementById("sec-plugins").hidden=!verP;
+  document.querySelectorAll("#rejilla .tarjeta").forEach(function(t){
+    var ok=(v==="todo"||t.dataset.cat===v)&&(!q||t.dataset.q.indexOf(q)>-1);
+    t.hidden=!ok;if(ok)n++;
   });
+  document.getElementById("vacio").hidden=n>0;
+  document.getElementById("contador").textContent=n+(n===1?" plugin":" plugins");
+  document.getElementById("tit-plugins").textContent=v==="instrumento"?"Instrumentos":v==="efecto"?"Efectos":"Todos los plugins";
+  var tit={todo:["Plugins","Instrumentos y efectos VST3 para música pesada. Todos gratis, todos hechos para Windows y FL Studio."],
+   bundles:["Bundles","Todo junto: elige un paquete y descarga varios plugins de una vez."],
+   instrumento:["Instrumentos","Un generador de kicks, un sintetizador lead y un generador de bajos."],
+   efecto:["Efectos","Compresión, ecualización y distorsión para tu mezcla."]}[v];
+  document.getElementById("cat-titulo").textContent=tit[0];document.getElementById("cat-sub").textContent=tit[1];
+}
+document.getElementById("buscar").addEventListener("input",function(){
+  if(vista==="bundles"){location.hash="#/plugins";return}
+  pintaCat(vista);
 });
+pintaCat("todo");
+
+function bajar(url){
+  var f=document.createElement("iframe");f.style.display="none";f.setAttribute("aria-hidden","true");f.src=url;
+  document.body.appendChild(f);setTimeout(function(){f.remove()},60000);
+}
+function bajarTodo(ids){
+  var est=document.getElementById("estado");
+  if(est){est.hidden=false;est.querySelector("h2").textContent="Descargando "+ids.length+" plugins";est.scrollIntoView({block:"center",behavior:"smooth"})}
+  ids.forEach(function(id,i){
+    var li=document.getElementById("st-"+id);
+    setTimeout(function(){
+      bajar(BASE+pl(id).arch);
+      if(li){li.classList.add("listo");li.querySelector("span").textContent="descarga iniciada"}
+      if(est&&i===ids.length-1){est.querySelector("h2").textContent="Listo: revisa tu carpeta de Descargas"}
+    },i*1500);
+  });
+}
+function incluidoEn(p){
+  var r=B.filter(function(b){return b.items.indexOf(p.id)>-1});
+  return r.length?'<p class="incluido">Incluido en: '+r.map(function(b){return '<a href="#/bundle/'+b.id+'">'+esc(b.nombre)+'</a>'}).join(" · ")+'</p>':"";
+}
 function detalle(p){
-  var otros=P.filter(function(x){return x.id!==p.id}).slice(0,3);
+  var i=P.indexOf(p),ant=P[(i+P.length-1)%P.length],sig=P[(i+1)%P.length];
   var nota=p.manual?'<p class="nota-manual">Descomprime el .zip y copia la carpeta <code>GabberDrive.vst3</code> a <code>C:\\Program Files\\Common Files\\VST3</code>. Después busca plugins nuevos en FL Studio.</p>':'';
+  var otros=P.filter(function(x){return x.id!==p.id&&x.cat===p.cat}).concat(P.filter(function(x){return x.id!==p.id&&x.cat!==p.cat})).slice(0,3);
   return '<div style="--acento:'+p.acento+'">'+
+   '<div class="barra-desc" id="barra"><div class="wrap"><div><b>'+esc(p.nombre)+'</b><small>'+esc(p.tipo)+' · Gratis</small></div><a class="boton" href="'+BASE+p.arch+'" download>Descargar</a></div></div>'+
    '<p class="migas"><a href="#/">Inicio</a> / <a href="#/plugins">Plugins</a> / '+esc(p.nombre)+'</p>'+
-   '<div class="det-cab"><div><span class="tipo">'+esc(p.tipo)+'</span><h1>'+esc(p.nombre)+'</h1><p class="lema">'+esc(p.lema)+'</p></div>'+
-   '<div class="det-descarga"><a class="boton" href="'+BASE+p.arch+'" download>Descargar gratis</a><small>Windows 64 bits · VST3'+(p.manual?' · sin instalador':'')+'</small></div></div>'+
-   '<div class="escenario"><img src="img/'+p.img+'" width="'+p.w+'" height="'+p.h+'" alt="Interfaz de '+esc(p.nombre)+'"></div>'+
+   '<div class="det-cab"><div><span class="tipo">'+esc(p.tipo)+'</span><h1>'+esc(p.nombre)+'</h1><p class="lema">'+esc(p.lema)+'</p>'+
+   (p.ideal.length?'<div class="chips" aria-label="Ideal para">'+p.ideal.map(function(c){return '<span class="chip">'+esc(c)+'</span>'}).join("")+'</div>':'')+'</div>'+
+   '<div class="det-descarga"><a class="boton" href="'+BASE+p.arch+'" download>Descargar gratis</a><small>Windows 64 bits · VST3'+(p.manual?' · sin instalador':'')+'</small><button type="button" class="compartir" data-compartir="1">Copiar enlace</button></div></div>'+
+   '<div class="escenario"><img src="img/'+p.img+'" width="'+p.w+'" height="'+p.h+'" alt="Interfaz de '+esc(p.nombre)+'. Pulsa para ampliar" data-zoom="1"><button type="button" class="ampliar" data-zoom-btn="1">Ampliar</button></div>'+
    '<div class="det-cols"><div><h2>Qué incluye</h2><ul class="caract">'+p.car.map(function(c){return '<li>'+esc(c)+'</li>'}).join("")+'</ul></div>'+
-   '<div><h2>Ficha</h2><dl class="ficha"><div><dt>Tipo</dt><dd>'+esc(p.tipo)+'</dd></div><div><dt>Formato</dt><dd>VST3</dd></div><div><dt>Sistema</dt><dd>Windows 64 bits</dd></div><div><dt>Probado en</dt><dd>FL Studio</dd></div><div><dt>Precio</dt><dd>Gratis</dd></div></dl>'+nota+
-   '<p class="nota-manual">¿Primera vez? Lee <a href="#/instalar">cómo instalar</a> y el aviso de Windows.</p></div></div>'+
+   '<div><h2>Ficha</h2><dl class="ficha"><div><dt>Tipo</dt><dd>'+esc(p.tipo)+'</dd></div><div><dt>Formato</dt><dd>VST3</dd></div><div><dt>Sistema</dt><dd>Windows 64 bits</dd></div><div><dt>Probado en</dt><dd>FL Studio</dd></div><div><dt>Precio</dt><dd>Gratis</dd></div></dl>'+nota+incluidoEn(p)+
+   '<p class="nota-manual">¿Primera vez? Lee <a href="#/aviso">el aviso de Windows</a> y <a href="#/instalar">cómo instalar</a>.</p></div></div>'+
    '<div class="mas"><h2 class="titulo" style="font-size:2rem">Más plugins</h2><div class="rejilla">'+otros.map(tarjeta).join("")+'</div></div>'+
+   '<div class="vecinos"><a href="#/plugin/'+ant.id+'" style="--acento:'+ant.acento+'"><small>← Anterior</small><b>'+esc(ant.nombre)+'</b></a><a href="#/plugin/'+sig.id+'" style="--acento:'+sig.acento+'"><small>Siguiente →</small><b>'+esc(sig.nombre)+'</b></a></div>'+
    '<div style="height:84px"></div></div>';
 }
+function detalleBundle(b){
+  var items=b.items.map(pl),manual=items.some(function(p){return p.manual});
+  return '<div style="--acento:#d8b878">'+
+   '<div class="barra-desc" id="barra"><div class="wrap"><div><b>'+esc(b.nombre)+'</b><small>'+esc(b.tipo)+' · Gratis</small></div><button type="button" class="boton" id="bajar-todo-2">Descargar todo</button></div></div>'+
+   '<p class="migas"><a href="#/">Inicio</a> / <a href="#/bundles">Bundles</a> / '+esc(b.nombre)+'</p>'+
+   '<div class="det-cab"><div><span class="tipo">'+esc(b.tipo)+'</span><h1>'+esc(b.nombre)+'</h1><p class="lema">'+esc(b.lema)+'</p></div>'+
+   '<div class="det-descarga"><button type="button" class="boton" id="bajar-todo">Descargar los '+items.length+' plugins</button><small>Gratis · Windows 64 bits · VST3</small>'+
+   '<p class="nota-bundle">Se descargan uno por uno. Si tu navegador pregunta si permites varias descargas, acepta.'+(manual?' GabberDrive viene en .zip y se copia a mano.':'')+'</p></div></div>'+
+      '<div class="estado-desc" id="estado" hidden aria-live="polite"><h2>Descargando…</h2><p>Se baja un instalador cada pocos segundos. Si tu navegador pregunta si permites varias descargas, acepta. Si alguno no se descargó, pulsa su botón.</p><ul>'+items.map(function(p){return '<li id="st-'+p.id+'"><div><b>'+esc(p.nombre)+'</b><span>en cola</span></div><a href="'+BASE+p.arch+'" download>Descargar</a></li>'}).join("")+'</ul></div>'+
+   '<div class="rejilla">'+
+   items.map(function(p){return '<div class="tarjeta" style="--acento:'+p.acento+'"><a class="media" href="#/plugin/'+p.id+'"><img src="img/m/'+p.img+'" width="900" height="'+Math.round(p.h*900/p.w)+'" alt="Interfaz de '+esc(p.nombre)+'" loading="lazy"></a><div class="cuerpo"><span class="tipo">'+esc(p.tipo)+'</span><h3>'+esc(p.nombre)+'</h3><p>'+esc(p.corto)+'</p><div class="ver"><a href="#/plugin/'+p.id+'">Ver plugin</a><a class="gratis" href="'+BASE+p.arch+'" download>Descargar</a></div></div></div>'}).join("")+
+   '</div>'+
+'<div class="mas"><h2 class="titulo" style="font-size:2rem">Otros bundles</h2><div class="bundles">'+B.filter(function(x){return x.id!==b.id}).map(tarjetaBundle).join("")+'</div></div>'+
+   '<div style="height:84px"></div></div>';
+}
+var obs;
+function observarBarra(){
+  if(obs)obs.disconnect();
+  var barra=document.getElementById("barra"),obj=document.querySelector(".det-descarga");
+  if(!barra||!obj||!("IntersectionObserver" in window))return;
+  obs=new IntersectionObserver(function(es){barra.classList.toggle("ver",!es[0].isIntersecting&&es[0].boundingClientRect.top<0)},{rootMargin:"-70px 0px 0px 0px"});
+  obs.observe(obj);
+}
 function ruta(){
-  var h=location.hash||"#/", m=h.match(/^#\/plugin\/([\w-]+)/);
-  var p=m&&P.filter(function(x){return x.id===m[1]})[0];
-  if(p){
+  document.body.classList.remove("menu-abierto");document.getElementById("menu").setAttribute("aria-expanded","false");
+  var h=location.hash||"#/", m=h.match(/^#\/plugin\/([\w-]+)/), mb=h.match(/^#\/bundle\/([\w-]+)/);
+  var cm=h.match(/^#\/(plugins|bundles)(?:\/(\w+))?$/);
+  var p=m&&pl(m[1]), bu=mb&&B.filter(function(x){return x.id===mb[1]})[0];
+  document.body.classList.remove("en-plugin","en-catalogo");
+  document.title="Injustice Audio · Plugins gratis para gabber y hardcore";
+  if(p||bu){
     document.body.classList.add("en-plugin");
-    document.getElementById("detalle").innerHTML=detalle(p);
-    document.title=p.nombre+" · Injustice Audio";
+    document.getElementById("detalle").innerHTML=p?detalle(p):detalleBundle(bu);
+    document.title=(p?p.nombre:bu.nombre)+" · Injustice Audio";
+    if(bu){["bajar-todo","bajar-todo-2"].forEach(function(i){document.getElementById(i).addEventListener("click",function(){bajarTodo(bu.items)})})}
+    observarBarra();
+    window.scrollTo(0,0);
+  }else if(cm){
+    document.body.classList.add("en-catalogo");
+    var v=cm[1]==="bundles"?"bundles":(cm[2]==="instrumento"||cm[2]==="efecto"?cm[2]:"todo");
+    pintaCat(v);
+    document.title=(v==="bundles"?"Bundles":"Plugins")+" · Injustice Audio";
     window.scrollTo(0,0);
   }else{
-    document.body.classList.remove("en-plugin");
-    document.title="Injustice Audio · Plugins gratis para gabber y hardcore";
-    var id={"#/plugins":"plugins","#/instalar":"instalar","#/preguntas":"preguntas"}[h];
+    var id={"#/aviso":"aviso-windows","#/instalar":"instalar","#/preguntas":"preguntas"}[h];
     var el=id&&document.getElementById(id);
-    if(el){setTimeout(function(){el.scrollIntoView()},0)}else{window.scrollTo(0,0)}
+    if(el){if(el.tagName==="DETAILS")el.open=true;setTimeout(function(){el.scrollIntoView()},0)}else{window.scrollTo(0,0)}
   }
 }
-window.addEventListener("hashchange",ruta);ruta();
+var visor=document.getElementById("visor"),vimg=document.getElementById("visor-img");
+document.addEventListener("click",function(e){
+  var t=e.target;
+  var zb=t.closest&&t.closest("[data-zoom-btn]");
+  if(zb){var im=zb.parentNode.querySelector("img");vimg.src=im.src;vimg.alt=im.alt;visor.classList.add("abierto")}
+  else if(t.dataset&&t.dataset.zoom){vimg.src=t.src;vimg.alt=t.alt;visor.classList.add("abierto")}
+  else if(visor.classList.contains("abierto")){visor.classList.remove("abierto")}
+});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){visor.classList.remove("abierto");document.body.classList.remove("menu-abierto")}});
+document.addEventListener("click",function(e){
+  var c=e.target.closest&&e.target.closest("[data-compartir]");if(!c)return;
+  var url=location.href,fin=function(){c.textContent="Enlace copiado";setTimeout(function(){c.textContent="Copiar enlace"},1800)};
+  if(navigator.share&&matchMedia("(pointer:coarse)").matches){navigator.share({title:document.title,url:url}).catch(function(){})}
+  else if(navigator.clipboard){navigator.clipboard.writeText(url).then(fin,fin)}else{fin()}
+});
+document.getElementById("menu").addEventListener("click",function(){
+  var a=document.body.classList.toggle("menu-abierto");this.setAttribute("aria-expanded",a);
+});
+var hd=document.querySelector("header.sitio");
+function alScroll(){hd.classList.toggle("scrolled",window.scrollY>8)}
+window.addEventListener("scroll",alScroll,{passive:true});alScroll();
+var esc1=document.querySelector(".escena");
+if(esc1&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&matchMedia("(hover:hover)").matches){
+  var por=document.querySelector(".portada");
+  por.addEventListener("pointermove",function(e){
+    var r=por.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    esc1.querySelectorAll("img").forEach(function(im,i){var k=(i+1)*6;im.style.transform="translate("+(-x*k).toFixed(1)+"px,"+(-y*k).toFixed(1)+"px)"});
+  });
+  por.addEventListener("pointerleave",function(){esc1.querySelectorAll("img").forEach(function(im){im.style.transform=""})});
+}
+window.addEventListener("hashchange",function(){ruta();var m=document.getElementById("contenido");if(m&&!/^#\/(aviso|instalar|preguntas)$/.test(location.hash)){m.focus({preventScroll:true})}});ruta();
 </script>
 </body>
 </html>
